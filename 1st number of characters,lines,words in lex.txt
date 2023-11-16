@@ -1,0 +1,16 @@
+%{
+int nlines,nwords,nchars;
+%}
+%%
+\n {
+nchars++; nlines++;
+}
+[^ \n\t]+ {nwords++,nchars=nchars+yyleng;}
+. {nchars++;}
+%%
+int yywrap() {}
+int main()
+{
+yylex();
+printf("lines=%d\nwords=%d\nchars=%d",nlines,nwords,nchars);
+}
